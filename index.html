@@ -79,12 +79,10 @@ section .sec-desc{text-align:center;color:#777;margin-bottom:48px;font-size:16px
 .signup .btn-submit{background:#ff6f00;color:#fff;border:none;padding:16px 60px;border-radius:30px;font-size:18px;font-weight:700;cursor:pointer;transition:all .3s;box-shadow:0 4px 20px rgba(255,111,0,.35)}
 .signup .btn-submit:hover{transform:translateY(-2px);box-shadow:0 6px 28px rgba(255,111,0,.45)}
 
-.highlights .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
-.v-card{background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 2px 12px rgba(0,0,0,.05);transition:transform .3s}
-.v-card:hover{transform:translateY(-4px)}
-.v-card video{width:100%;height:200px;object-fit:cover;background:#000;display:block}
-.v-card .thumb{height:200px;background:linear-gradient(135deg,#1a5c36,#2e7d32);display:flex;align-items:center;justify-content:center;font-size:40px;color:#fff;font-weight:700}
-.v-card .thumb:hover{background:linear-gradient(135deg,#ff6f00,#f57c00)}
+.highlights .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.v-card{background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 2px 12px rgba(0,0,0,.05);transition:transform .3s;display:block;text-decoration:none;color:inherit}
+a.v-card:hover{transform:translateY(-4px)}
+.v-card .thumb{height:220px;background:#eee no-repeat center;background-size:cover}
 .v-card .info{padding:14px 16px}
 .v-card .info h5{font-size:15px;color:#333;margin-bottom:4px}
 .v-card .info .tag{font-size:12px;color:#ff6f00;background:rgba(255,111,0,.08);padding:2px 10px;border-radius:10px;display:inline-block}
@@ -392,69 +390,27 @@ nav .links{display:none}
 </footer>
 
 <script>
-// --- 视频数据 ---
-const BASE_REPO = "videos";
-const BASE_RELEASE = "https://github.com/zhangwenwan96-crypto/xizi-challenge/releases/download/videos-v1";
-// 仓库中可流式播放的视频 (已上传到 repo)
-const STREAMING = new Set(["video_04_fair_skin.mp4","video_06_student.mp4","video_06a_student.mp4","video_09_flower_goddess.mp4"]);
+// --- 往期精彩视频 ---
+const DOC_URL = "https://alidocs.dingtalk.com/i/nodes/r1R7q3QmWe7LmYPlhZOaxQNoJxkXOEP2?iframeQuery=utm_medium%3Dportal_team_home2_trends%26utm_source%3Dportal";
 const videos = [
-  {file:"video_01_0518_highlight.mp4",title:"5月18日 精彩集锦",tag:"日常 · 综合"},
-  {file:"video_02_0516_first.mp4",title:"5月16日 首场挑战",tag:"首秀 · 经典"},
-  {file:"video_03_henan_beauty.mp4",title:"河南美女游客挑战",tag:"路人 · 高颜值"},
-  {file:"video_04_fair_skin.mp4",title:"白皮肤小姐姐",tag:"颜值 · 种草"},
-  {file:"video_05_silent_beauty.mp4",title:"无声美女表情包",tag:"反差 · 搞笑"},
-  {file:"video_06_student.mp4",title:"大三女大学生①",tag:"青春 · 活力"},
-  {file:"video_06a_student.mp4",title:"大三女大学生②",tag:"青春 · 校园"},
-  {file:"video_07_robot_dog.mp4",title:"宇树科技机器狗",tag:"科技 · 趣味"},
-  {file:"video_08_robot_dog2.mp4",title:"第二只机器狗",tag:"科技 · 互动"},
-  {file:"video_09_flower_goddess.mp4",title:"花神小姐姐",tag:"古风 · 氛围感"},
-  {file:"video_10_taiwan_tourist.mp4",title:"台湾游客挑战",tag:"游客 · 跨地域"},
-  {file:"video_11_miaomiao.mp4",title:"喵喵挑战",tag:"可爱 · 宠物"},
-  {file:"video_12_0519_second.mp4",title:"5月19日 第二场",tag:"日常 · 精彩"},
-  {file:"video_13_0525.mp4",title:"5月25日 精彩",tag:"街头 · 随机"},
-  {file:"video_14_kindergarten_teacher.mp4",title:"幼师挑战",tag:"职业 · 反差"},
-  {file:"video_15_0528_part3.mp4",title:"5月28日 Part3",tag:"采访 · 亮点"},
-  {file:"video_16_0528_full.mp4",title:"5月28日 完整版",tag:"完整 · 合集"},
-  {file:"video_17_0530_full1.mp4",title:"5月30日 完整版①",tag:"拍摄 · 工作室"},
-  {file:"video_18_0530_part2.mp4",title:"5月30日 Part2",tag:"花絮 · 精彩"},
-  {file:"video_19_short1.mp4",title:"精彩短片①",tag:"短视频 · 切片"},
-  {file:"video_20_short2.mp4",title:"精彩短片②",tag:"短视频 · 切片"},
-  {file:"video_21_short3.mp4",title:"精彩短片③",tag:"短视频 · 切片"},
-  {file:"video_22_short4.mp4",title:"精彩短片④",tag:"短视频 · 切片"},
-  {file:"video_23_short5.mp4",title:"精彩短片⑤",tag:"短视频 · 切片"},
+  {img:"images/01.png",title:"婚前热舞",tag:"街头 · 舞蹈"},
+  {img:"images/02.png",title:"偶遇喊麦高手",tag:"路人 · 才艺"},
+  {img:"images/03.png",title:"公益三年后，她更相信人性",tag:"公益 · 故事"},
+  {img:"images/04.png",title:"杭州70岁阿姨活成40岁的秘诀",tag:"本地 · 生活"},
+  {img:"images/05.png",title:"大学生早8趣事",tag:"校园 · 搞笑"},
+  {img:"images/06.png",title:"打开飞机舱门2000只小鸡同时在叫",tag:"趣味 · 反差"},
+  {img:"images/07.png",title:"幼儿园老师的日常",tag:"职业 · 温暖"},
+  {img:"images/08.png",title:"89岁大爷每天5000步+工作2小时",tag:"银发 · 励志"},
 ];
 
 const grid = document.getElementById("video-grid");
-let showing = 9;
 
-function render(n) {
-  grid.innerHTML = videos.slice(0, n).map(v => {
-    if (STREAMING.has(v.file)) {
-      return `<div class="v-card">
-        <video controls preload="metadata" src="${BASE_REPO}/${v.file}"></video>
-        <div class="info"><h5>${v.title}</h5><span class="tag">${v.tag}</span></div>
-      </div>`;
-    } else {
-      return `<div class="v-card">
-        <div class="thumb" style="cursor:pointer" onclick="window.open('${BASE_RELEASE}/${v.file}')">⬇</div>
-        <div class="info"><h5>${v.title}</h5><span class="tag">${v.tag}</span></div>
-      </div>`;
-    }
-  }).join("");
-
-  if (n < videos.length) {
-    grid.insertAdjacentHTML("afterend",
-      `<div class="show-more"><button onclick="showAll()">📺 查看更多 (${videos.length - n}个)</button></div>`
-    );
-  }
-}
-
-function showAll() {
-  showing = videos.length;
-  render(showing);
-}
-
-render(showing);
+grid.innerHTML = videos.map(v =>
+  `<a href="${DOC_URL}" target="_blank" class="v-card">
+    <div class="thumb" style="background-image:url(${v.img});background-size:cover;background-position:center"></div>
+    <div class="info"><h5>${v.title}</h5><span class="tag">${v.tag}</span></div>
+  </a>`
+).join("");
 
 // 平滑滚动
 document.querySelectorAll('a[href^="#"]').forEach(a=>{
