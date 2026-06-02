@@ -79,14 +79,15 @@ section .sec-desc{text-align:center;color:#777;margin-bottom:48px;font-size:16px
 .signup .btn-submit{background:#ff6f00;color:#fff;border:none;padding:16px 60px;border-radius:30px;font-size:18px;font-weight:700;cursor:pointer;transition:all .3s;box-shadow:0 4px 20px rgba(255,111,0,.35)}
 .signup .btn-submit:hover{transform:translateY(-2px);box-shadow:0 6px 28px rgba(255,111,0,.45)}
 
-.highlights .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
-.v-card{background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 2px 12px rgba(0,0,0,.05);transition:transform .3s;cursor:pointer}
+.highlights .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.v-card{background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 2px 12px rgba(0,0,0,.05);transition:transform .3s}
 .v-card:hover{transform:translateY(-4px)}
-.v-card .thumb{height:180px;background:linear-gradient(135deg,#e8f5e9,#b2dfdb);display:flex;align-items:center;justify-content:center;font-size:48px}
-.v-card .info{padding:16px}
+.v-card video{width:100%;height:200px;object-fit:cover;background:#000;display:block}
+.v-card .info{padding:14px 16px}
 .v-card .info h5{font-size:15px;color:#333;margin-bottom:4px}
 .v-card .info .tag{font-size:12px;color:#ff6f00;background:rgba(255,111,0,.08);padding:2px 10px;border-radius:10px;display:inline-block}
-.v-card .stats{font-size:12px;color:#aaa;margin-top:8px;display:flex;gap:12px}
+.highlights .show-more{text-align:center;margin-top:24px}
+.highlights .show-more button{background:#0a5c36;color:#fff;border:none;padding:12px 36px;border-radius:30px;font-size:15px;font-weight:600;cursor:pointer}
 
 .prizes{background:#f0faf3}
 .prizes .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
@@ -277,16 +278,7 @@ nav .links{display:none}
 <div class="container">
 <h2>往期精彩</h2>
 <p class="sec-desc">你的一次勇敢表达，可能成为西湖边的一段爆款故事</p>
-<div class="grid">
-<div class="v-card"><div class="thumb">😂</div><div class="info"><h5>东北小姐姐挑战防晒霜</h5><span class="tag">高颜值 · 搞笑</span><div class="stats"><span>▶ 12.3万</span><span>❤ 8.2k</span><span>💬 1.5k</span></div></div></div>
-<div class="v-card"><div class="thumb">🧓</div><div class="info"><h5>杭州阿姨30秒卖湿巾</h5><span class="tag">本地生活 · 反差</span><div class="stats"><span>▶ 8.9万</span><span>❤ 6.1k</span><span>💬 2.3k</span></div></div></div>
-<div class="v-card"><div class="thumb">👘</div><div class="info"><h5>古风小姐姐介绍护手霜</h5><span class="tag">氛围感 · 种草</span><div class="stats"><span>▶ 15.7万</span><span>❤ 9.8k</span><span>💬 3.2k</span></div></div></div>
-<div class="v-card"><div class="thumb">🌍</div><div class="info"><h5>外国游客挑战中文带货</h5><span class="tag">国际化 · 爆笑</span><div class="stats"><span>▶ 20.1万</span><span>❤ 12.5k</span><span>💬 4.1k</span></div></div></div>
-<div class="v-card"><div class="thumb">💑</div><div class="info"><h5>情侣默契挑战护手霜</h5><span class="tag">甜蜜互动 · 高甜</span><div class="stats"><span>▶ 10.6万</span><span>❤ 7.3k</span><span>💬 1.8k</span></div></div></div>
-<div class="v-card"><div class="thumb">🎭</div><div class="info"><h5>社牛大学生方言带货</h5><span class="tag">才艺 · 搞笑</span><div class="stats"><span>▶ 18.4万</span><span>❤ 11.2k</span><span>💬 3.9k</span></div></div></div>
-<div class="v-card"><div class="thumb">👶</div><div class="info"><h5>萌娃挑战儿童湿巾</h5><span class="tag">亲子 · 可爱</span><div class="stats"><span>▶ 22.0万</span><span>❤ 14.1k</span><span>💬 5.3k</span></div></div></div>
-<div class="v-card"><div class="thumb">🏃</div><div class="info"><h5>跑步小哥30秒卖饮料</h5><span class="tag">运动 · 即兴</span><div class="stats"><span>▶ 9.8万</span><span>❤ 5.6k</span><span>💬 1.2k</span></div></div></div>
-</div>
+<div class="grid" id="video-grid"></div>
 </div>
 </section>
 
@@ -398,21 +390,75 @@ nav .links{display:none}
 </footer>
 
 <script>
-// Tab switching for leaderboard
-document.querySelectorAll('.tab').forEach(t=>{
-t.addEventListener('click',function(){
-document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));
-this.classList.add('active');
-});
-});
-// Smooth scroll
+// --- 视频数据 ---
+const BASE = "https://github.com/zhangwenwan96-crypto/xizi-challenge/releases/download/videos-v1";
+const videos = [
+  {file:"video_01_0518_highlight.mp4",title:"5月18日 精彩集锦",tag:"日常 · 综合"},
+  {file:"video_02_0516_first.mp4",title:"5月16日 首场挑战",tag:"首秀 · 经典"},
+  {file:"video_03_henan_beauty.mp4",title:"河南美女游客挑战",tag:"路人 · 高颜值"},
+  {file:"video_04_fair_skin.mp4",title:"白皮肤小姐姐",tag:"颜值 · 种草"},
+  {file:"video_05_silent_beauty.mp4",title:"无声美女表情包",tag:"反差 · 搞笑"},
+  {file:"video_06_student.mp4",title:"大三女大学生①",tag:"青春 · 活力"},
+  {file:"video_06a_student.mp4",title:"大三女大学生②",tag:"青春 · 校园"},
+  {file:"video_07_robot_dog.mp4",title:"宇树科技机器狗",tag:"科技 · 趣味"},
+  {file:"video_08_robot_dog2.mp4",title:"第二只机器狗",tag:"科技 · 互动"},
+  {file:"video_09_flower_goddess.mp4",title:"花神小姐姐",tag:"古风 · 氛围感"},
+  {file:"video_10_taiwan_tourist.mp4",title:"台湾游客挑战",tag:"游客 · 跨地域"},
+  {file:"video_11_miaomiao.mp4",title:"喵喵挑战",tag:"可爱 · 宠物"},
+  {file:"video_12_0519_second.mp4",title:"5月19日 第二场",tag:"日常 · 精彩"},
+  {file:"video_13_0525.mp4",title:"5月25日 精彩",tag:"街头 · 随机"},
+  {file:"video_14_kindergarten_teacher.mp4",title:"幼师挑战",tag:"职业 · 反差"},
+  {file:"video_15_0528_part3.mp4",title:"5月28日 Part3",tag:"采访 · 亮点"},
+  {file:"video_16_0528_full.mp4",title:"5月28日 完整版",tag:"完整 · 合集"},
+  {file:"video_17_0530_full1.mp4",title:"5月30日 完整版①",tag:"拍摄 · 工作室"},
+  {file:"video_18_0530_part2.mp4",title:"5月30日 Part2",tag:"花絮 · 精彩"},
+  {file:"video_19_short1.mp4",title:"精彩短片①",tag:"短视频 · 切片"},
+  {file:"video_20_short2.mp4",title:"精彩短片②",tag:"短视频 · 切片"},
+  {file:"video_21_short3.mp4",title:"精彩短片③",tag:"短视频 · 切片"},
+  {file:"video_22_short4.mp4",title:"精彩短片④",tag:"短视频 · 切片"},
+  {file:"video_23_short5.mp4",title:"精彩短片⑤",tag:"短视频 · 切片"},
+];
+
+const grid = document.getElementById("video-grid");
+let showing = 9;
+
+function render(n) {
+  grid.innerHTML = videos.slice(0, n).map(v =>
+    `<div class="v-card">
+      <video controls preload="metadata" src="${BASE}/${v.file}" poster="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 225'><rect fill='%230a5c36' width='400' height='225'/><text fill='white' font-size='60' text-anchor='middle' x='200' y='120' dy='.3em'>▶</text></svg>"></video>
+      <div class="info"><h5>${v.title}</h5><span class="tag">${v.tag}</span></div>
+    </div>`
+  ).join("");
+
+  if (n < videos.length) {
+    grid.insertAdjacentHTML("afterend",
+      `<div class="show-more"><button onclick="showAll()">📺 查看更多 (${videos.length - n}个)</button></div>`
+    );
+  }
+}
+
+function showAll() {
+  showing = videos.length;
+  render(showing);
+}
+
+render(showing);
+
+// 平滑滚动
 document.querySelectorAll('a[href^="#"]').forEach(a=>{
-a.addEventListener('click',function(e){
-e.preventDefault();
-document.querySelector(this.getAttribute('href')).scrollIntoView({behavior:'smooth'});
+  a.addEventListener('click',function(e){
+    e.preventDefault();
+    document.querySelector(this.getAttribute('href')).scrollIntoView({behavior:'smooth'});
+  });
 });
+
+// 排行榜 tab 切换
+document.querySelectorAll('.tab').forEach(t=>{
+  t.addEventListener('click',function(){
+    document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));
+    this.classList.add('active');
+  });
 });
 </script>
-<!-- deployed 2026-06-02T11:47:07.355331 -->
 </body>
 </html>
