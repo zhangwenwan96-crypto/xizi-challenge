@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>西子湖畔挑战赛总结汇报</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', sans-serif; background: #f5f5f5; }
+        
+        /* 幻灯片容器 */
+        .slide {
+            width: 100%;
+            min-height: 100vh;
+            padding: 60px 80px;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+        
+        /* 配色方案 - 可修改 */
+        :root {
+            --primary: #1a5c36;      /* 主色：西湖绿 */
+            --secondary: #2e7d32;    /* 辅色 */
+            --accent: #ff6f00;       /* 强调色 */
+            --bg-light: #f8faf8;     /* 浅背景 */
+            --bg-dark: #1a5c36;      /* 深背景 */
+            --text-dark: #1a1a1a;
+            --text-light: #ffffff;
+            --text-muted: #666666;
+        }
+        
+        /* 第1页：战略大图 */
+        .slide-1 {
+            background: linear-gradient(135deg, var(--bg-light) 0%, #e8f5e9 100%);
+        }
+        .slide-1 h1 {
+            font-size: 42px;
+            color: var(--primary);
+            margin-bottom: 20px;
+            line-height: 1.3;
+        }
+        .slide-1 .subtitle {
+            font-size: 18px;
+            color: var(--text-muted);
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 3px solid var(--primary);
+        }
+        .strategy-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 20px;
+            margin-top: 30px;
+        }
+        .strategy-card {
+            background: white;
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            border-top: 4px solid var(--primary);
+        }
+        .strategy-card h3 {
+            font-size: 14px;
+            color: var(--primary);
+            margin-bottom: 8px;
+            text-transform: uppercase;
+        }
+        .strategy-card h4 {
+            font-size: 18px;
+            color: var(--text-dark);
+            margin-bottom: 12px;
+        }
+        .strategy-card p {
+            font-size: 13px;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+        .quote-box {
+            margin-top: 40px;
+            padding: 24px 32px;
+            background: var(--primary);
+            color: white;
+            border-radius: 12px;
+            font-size: 16px;
+            line-height: 1.8;
+        }
+        
+        /* 第2页：9天复盘 */
+        .slide-2 {
+            background: white;
+        }
+        .slide-header {
+            margin-bottom: 40px;
+        }
+        .slide-header h2 {
+            font-size: 36px;
+            color: var(--primary);
+            margin-bottom: 12px;
+        }
+        .slide-header p {
+            font-size: 16px;
+            color: var(--text-muted);
+        }
+        .stats-row {
+            display: flex;
+            gap: 40px;
+            margin: 30px 0;
+        }
+        .stat-item {
+            text-align: center;
+        }
+        .stat-number {
+            font-size: 56px;
+            font-weight: bold;
+            color: var(--primary);
+        }
+        .stat-label {
+            font-size: 14px;
+            color: var(--text-muted);
+            margin-top: 8px;
+        }
+        .four-elements {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin-top: 40px;
+        }
+        .element-card {
+            background: var(--bg-light);
+            border-radius: 12px;
+            padding: 24px;
+            text-align: center;
+        }
+        .element-card h4 {
+            font-size: 16px;
+            color: var(--primary);
+            margin-bottom: 12px;
+        }
+        .element-card p {
+            font-size: 13px;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+        
+        /* 第3页：三平台数据 */
+        .slide-3 {
+            background: linear-gradient(180deg, #fafafa 0%, white 100%);
+        }
+        .platform-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            margin-top: 30px;
+        }
+        .platform-card {
+            background: white;
+            border-radius: 16px;
+            padding: 28px;
+            box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+        }
+        .platform-card h3 {
+            font-size: 20px;
+            color: var(--primary);
+            margin-bottom: 16px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid #e0e0e0;
+        }
+        .platform-card .highlight {
+            background: #e8f5e9;
+            padding: 12px 16px;
+            border-radius: 8px;
+            margin: 16px 0;
+            font-size: 14px;
+        }
+        .platform-card .problem {
+            color: #d32f2f;
+            font-size: 13px;
+            margin: 12px 0;
+        }
+        .platform-card .strategy {
+            color: var(--primary);
+            font-size: 13px;
+            font-weight: 500;
+        }
+        .action-items {
+            margin-top: 40px;
+            display: flex;
+            gap: 16px;
+        }
+        .action-item {
+            flex: 1;
+            background: var(--primary);
+            color: white;
+            padding: 20px 24px;
+            border-radius: 12px;
+        }
+        .action-item h4 {
+            font-size: 14px;
+            margin-bottom: 8px;
+            opacity: 0.9;
+        }
+        .action-item p {
+            font-size: 13px;
+            line-height: 1.5;
+            opacity: 0.85;
+        }
+        
+        /* 第4页：近期路线 */
+        .slide-4 {
+            background: white;
+        }
+        .timeline {
+            display: flex;
+            gap: 20px;
+            margin-top: 40px;
+        }
+        .timeline-phase {
+            flex: 1;
+            background: var(--bg-light);
+            border-radius: 16px;
+            padding: 28px;
+            position: relative;
+        }
+        .timeline-phase::before {
+            content: attr(data-phase);
+            position: absolute;
+            top: -12px;
+            left: 24px;
+            background: var(--accent);
+            color: white;
+            padding: 4px 16px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        .timeline-phase h3 {
+            font-size: 20px;
+            color: var(--primary);
+            margin-bottom: 16px;
+            margin-top: 8px;
+        }
+        .timeline-phase ul {
+            list-style: none;
+            font-size: 14px;
+            color: var(--text-muted);
+        }
+        .timeline-phase li {
+            padding: 8px 0;
+            border-bottom: 1px dashed #e0e0e0;
+        }
+        .timeline-phase li:last-child {
+            border-bottom: none;
+        }
+        
+        /* 第5页：完整玩法 */
+        .slide-5 {
+            background: linear-gradient(135deg, #f8faf8 0%, #e8f5e9 100%);
+        }
+        .play-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+            margin-top: 30px;
+        }
+        .play-card {
+            background: white;
+            border-radius: 16px;
+            padding: 28px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        .play-card .number {
+            width: 40px;
+            height: 40px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 16px;
+        }
+        .play-card h3 {
+            font-size: 20px;
+            color: var(--text-dark);
+            margin-bottom: 8px;
+        }
+        .play-card .tag {
+            font-size: 12px;
+            color: var(--accent);
+            margin-bottom: 12px;
+        }
+        .play-card p {
+            font-size: 14px;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+        
+        /* 第6页：赛制机制 */
+        .slide-6 {
+            background: white;
+        }
+        .mechanism-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-top: 30px;
+        }
+        .mechanism-left h3 {
+            font-size: 20px;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+        .flow-step {
+            display: flex;
+            align-items: center;
+            margin: 12px 0;
+            font-size: 14px;
+        }
+        .flow-step .arrow {
+            margin: 0 12px;
+            color: var(--accent);
+        }
+        .score-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+        }
+        .score-item {
+            background: var(--bg-light);
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+        }
+        .score-item .percent {
+            font-size: 36px;
+            font-weight: bold;
+            color: var(--primary);
+        }
+        .score-item .label {
+            font-size: 13px;
+            color: var(--text-muted);
+            margin-top: 8px;
+        }
+        
+        /* 第7页：试跑挑战 */
+        .slide-7 {
+            background: linear-gradient(180deg, #fafafa 0%, white 100%);
+        }
+        .challenge-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+            margin-top: 30px;
+        }
+        .challenge-card {
+            background: white;
+            border-radius: 16px;
+            padding: 28px;
+            box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+        }
+        .challenge-card h3 {
+            font-size: 18px;
+            color: var(--primary);
+            margin-bottom: 16px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid #e8f5e9;
+        }
+        .challenge-card ul {
+            list-style: none;
+            font-size: 14px;
+            color: var(--text-muted);
+        }
+        .challenge-card li {
+            padding: 8px 0;
+            padding-left: 20px;
+            position: relative;
+        }
+        .challenge-card li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+        }
+        .summary-box {
+            margin-top: 30px;
+            padding: 24px;
+            background: var(--primary);
+            color: white;
+            border-radius: 12px;
+        }
+        .summary-box h4 {
+            font-size: 16px;
+            margin-bottom: 12px;
+        }
+        .summary-box p {
+            font-size: 14px;
+            line-height: 1.7;
+            opacity: 0.9;
+        }
+        
+        /* 第8页：风险控制 */
+        .slide-8 {
+            background: white;
+        }
+        .risk-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+            margin-top: 30px;
+        }
+        .risk-card {
+            background: var(--bg-light);
+            border-radius: 16px;
+            padding: 28px;
+            border-left: 4px solid #d32f2f;
+        }
+        .risk-card.safe {
+            border-left-color: var(--primary);
+        }
+        .risk-card h3 {
+            font-size: 18px;
+            color: var(--text-dark);
+            margin-bottom: 16px;
+        }
+        .risk-card .fail {
+            background: #ffebee;
+            padding: 12px 16px;
+            border-radius: 8px;
+            margin-bottom: 12px;
+        }
+        .risk-card .fail h4 {
+            font-size: 13px;
+            color: #d32f2f;
+            margin-bottom: 8px;
+        }
+        .risk-card .fail p {
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+        .risk-card .solution {
+            background: #e8f5e9;
+            padding: 12px 16px;
+            border-radius: 8px;
+        }
+        .risk-card .solution h4 {
+            font-size: 13px;
+            color: var(--primary);
+            margin-bottom: 8px;
+        }
+        .risk-card .solution p {
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+        
+        /* 页码 */
+        .page-number {
+            position: absolute;
+            bottom: 30px;
+            right: 40px;
+            font-size: 14px;
+            color: var(--text-muted);
+        }
+        
+        /* 打印样式 */
+        @media print {
+            .slide {
+                page-break-after: always;
+                min-height: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- 第1页：战略大图 -->
+<section class="slide slide-1">
+    <h1>《西子湖畔挑战赛》战略大图</h1>
+    <p class="subtitle">从街头采访到城市真人秀带货 IP · 战略定位：以西湖为天然片场，以真实路人为主角，以商品为互动道具，以淘宝直播为交易承接</p>
+    
+    <div class="strategy-grid">
+        <div class="strategy-card">
+            <h3>WHY</h3>
+            <h4>战略层｜为什么做</h4>
+            <p>1. 直播间身处西湖，自带城市IP<br>2. AI内容泛滥，真实路人反应更能建立信任</p>
+        </div>
+        <div class="strategy-card">
+            <h3>WHO</h3>
+            <h4>市场层｜为谁服务</h4>
+            <p>ToC: 淘宝直播用户、内容平台用户、西湖游客、私域用户<br>ToB: 品牌商家、西湖文旅</p>
+        </div>
+        <div class="strategy-card">
+            <h3>WHAT</h3>
+            <h4>产品层｜提供价值</h4>
+            <p>剧情带货：真实路人挑战 + 西湖场景 + 商品体验 + 直播互动</p>
+        </div>
+        <div class="strategy-card">
+            <h3>HOW</h3>
+            <h4>执行层｜如何落地</h4>
+            <p>标准闭环：花车/线上招募 → 街头采访 → 商品挑战 → 直播互动 → 短视频分发（放大器）</p>
+        </div>
+        <div class="strategy-card">
+            <h3>MONEY</h3>
+            <h4>财务层｜盈利变现</h4>
+            <p>多元收入：短视频带货、品牌/IP冠名、线下活动招商<br>闭环回流：盈利资金反哺战略迭代、产品升级、渠道扩张</p>
+        </div>
+    </div>
+    
+    <div class="quote-box">
+        <strong>战略金句：</strong>过去的直播带货，是主播对着镜头卖；西子湖畔挑战赛，是路人在西湖边替品牌发生故事。把每一次派样变成一次内容、一次互动、一次传播、一次转化。
+    </div>
+    
+    <span class="page-number">1 / 8</span>
+</section>
+
+<!-- 第2页：9天复盘 -->
+<section class="slide slide-2">
+    <div class="slide-header">
+        <h2>9天36个街头采访复盘</h2>
+        <p>核心判断：这是"西湖真实路人 × 商品挑战 × 淘宝直播互动"的 IP 验证实验</p>
+    </div>
+    
+    <div class="stats-row">
+        <div class="stat-item">
+            <div class="stat-number">9</div>
+            <div class="stat-label">天连续街采测试</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-number">36</div>
+            <div class="stat-label">累计采访样本</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-number">4</div>
+            <div class="stat-label">个/天 日均采访量</div>
+        </div>
+    </div>
+    
+    <p style="font-size: 16px; color: var(--primary); margin: 20px 0;">初步验证：方向可行，下一步从"随机采访"升级为"栏目化运营"</p>
+    
+    <h3 style="font-size: 20px; color: var(--text-dark); margin-bottom: 20px;">核心发现：真正有效的内容，不是普通问答，而是四个要素的组合</h3>
+    
+    <div class="four-elements">
+        <div class="element-card">
+            <h4>人物标签</h4>
+            <p>游客 / 学生 / 情侣 / 阿姨 / 高反差人群</p>
+        </div>
+        <div class="element-card">
+            <h4>情绪反应</h4>
+            <p>害羞 / 惊喜 / 爆笑 / 真诚 / 尴尬</p>
+        </div>
+        <div class="element-card">
+            <h4>商品挑战</h4>
+            <p>30秒介绍 / 方言介绍 / 互夸推荐 / 即兴种草</p>
+        </div>
+        <div class="element-card">
+            <h4>西湖场景</h4>
+            <p>城市名片 / 真实路人 / 偶遇感 / 打卡传播</p>
+        </div>
+    </div>
+    
+    <div style="margin-top: 40px; padding: 24px; background: var(--bg-light); border-radius: 12px;">
+        <h4 style="color: var(--primary); margin-bottom: 12px;">业务价值</h4>
+        <p style="color: var(--text-muted); line-height: 1.8;">街采不是直播外的独立内容，而是直播间的外场剧情入口。<br>
+        提升停留：路人挑战制造悬念｜提升互动：投票、打分、弹幕参与｜建立信任：真实体验弱化硬广感｜素材沉淀：一访多用：直播/短视频/小红书</p>
+    </div>
+    
+    <span class="page-number">2 / 8</span>
+</section>
+
+<!-- 第3页：三平台数据 -->
+<section class="slide slide-3">
+    <div class="slide-header">
+        <h2>三平台数据复盘</h2>
+        <p>抖音负责爆点传播，小红书负责种草沉淀，淘宝直播负责互动承接与转化</p>
+    </div>
+    
+    <div class="platform-grid">
+        <div class="platform-card">
+            <h3>抖音：爆点传播</h3>
+            <div class="highlight">
+                <strong>最优样本：</strong>西湖偶遇机器狗<br>
+                播放 1582｜5s完播 56.7%｜2s跳出 19.6%｜均播 42.96s
+            </div>
+            <p class="problem">问题：多条视频 2s跳出偏高，开头钩子不稳</p>
+            <p class="strategy">策略：前2秒直接给反差/结果；重点放大"新奇事件+人物标签+西湖场景"</p>
+        </div>
+        <div class="platform-card">
+            <h3>小红书：种草沉淀</h3>
+            <div class="highlight">
+                <strong>封面点击可提升：</strong>机器狗曝光 1756｜观看 283｜点击率 5.8%
+            </div>
+            <p class="problem">问题：点赞、评论、收藏、涨粉整体偏弱</p>
+            <p class="strategy">策略：强化封面标题、评论问题、福利信息；做"西湖偶遇+真实体验+打卡感"</p>
+        </div>
+        <div class="platform-card">
+            <h3>淘宝直播：承接转化</h3>
+            <div class="highlight">
+                <strong>直播链路待打通：</strong>采访停留 24-32s｜峰值 131人｜互动 0-4条
+            </div>
+            <p class="problem">问题：其余时段仅2-56人；采访与带货脱节，商品效果不佳</p>
+            <p class="strategy">策略：新增互动福利钩子；把采访任务与商品场景绑定，承接优惠券/派样/下单</p>
+        </div>
+    </div>
+    
+    <div style="margin-top: 30px; padding: 20px 24px; background: #fff3e0; border-radius: 12px; border-left: 4px solid var(--accent);">
+        <strong>结论：</strong>内容方向成立，但不能停留在"随机采访出片"；下一阶段必须形成"内容爆点 → 平台分发 → 直播承接 → 商品转化"的闭环。
+    </div>
+    
+    <div class="action-items">
+        <div class="action-item">
+            <h4>01 抖音降跳出</h4>
+            <p>统一"2秒钩子"模板：先结果、先反差、先情绪，不再铺垫寒暄</p>
+        </div>
+        <div class="action-item">
+            <h4>02 小红书促互动</h4>
+            <p>封面标题场景化，末尾加评论问题；福利/花车/西湖打卡强绑定</p>
+        </div>
+        <div class="action-item">
+            <h4>03 直播强承接</h4>
+            <p>外场采访设投票/抽奖/优惠券；商品变挑战道具，采访后立即进讲解和派样</p>
+        </div>
+    </div>
+    
+    <span class="page-number">3 / 8</span>
+</section>
+
+<!-- 第4页：近期路线 -->
+<section class="slide slide-4">
+    <div class="slide-header">
+        <h2>近期路线：先 MVP，再栏目化，最后 IP 化</h2>
+        <p>关键不是继续增加采访数量，而是把"选人、提问、商品植入、直播联动、数据复盘"标准化</p>
+    </div>
+    
+    <h3 style="font-size: 20px; color: var(--primary); margin-bottom: 20px;">三大升级方向</h3>
+    <div class="timeline">
+        <div class="timeline-phase" data-phase="方向1">
+            <h3>内容栏目化</h3>
+            <ul>
+                <li>每日主题挑战：防晒挑战、护手霜挑战、情侣互夸、方言带货</li>
+                <li>目标：提升成片率</li>
+            </ul>
+        </div>
+        <div class="timeline-phase" data-phase="方向2">
+            <h3>直播联动化</h3>
+            <ul>
+                <li>每天固定5-10分钟外场接入</li>
+                <li>主播点评，直播间投票、打分、发奖、抽免单</li>
+                <li>目标：提升停留互动</li>
+            </ul>
+        </div>
+        <div class="timeline-phase" data-phase="方向3">
+            <h3>数据运营化</h3>
+            <ul>
+                <li>建立采访数据表：人群、商品、笑点、成片率、播放、入群、核销</li>
+                <li>目标：沉淀方法论</li>
+            </ul>
+        </div>
+    </div>
+    
+    <h3 style="font-size: 20px; color: var(--primary); margin: 40px 0 20px;">30天落地节奏</h3>
+    <p style="color: var(--text-muted); margin-bottom: 20px;">先把现场能力标准化，再把直播联动做稳定，最后打包成品牌合作产品</p>
+    
+    <div style="display: flex; gap: 16px;">
+        <div style="flex: 1; padding: 20px; background: #e8f5e9; border-radius: 12px;">
+            <h4 style="color: var(--primary); margin-bottom: 12px;">第1周</h4>
+            <p style="font-size: 14px; color: var(--text-muted);">固定每日主题，建立选人标准，沉淀破冰话术</p>
+        </div>
+        <div style="flex: 1; padding: 20px; background: #e8f5e9; border-radius: 12px;">
+            <h4 style="color: var(--primary); margin-bottom: 12px;">第2-3周</h4>
+            <p style="font-size: 14px; color: var(--text-muted);">打通直播联动，建立投票/发奖/派样机制</p>
+        </div>
+        <div style="flex: 1; padding: 20px; background: #e8f5e9; border-radius: 12px;">
+            <h4 style="color: var(--primary); margin-bottom: 12px;">第4周</h4>
+            <p style="font-size: 14px; color: var(--text-muted);">数据复盘，输出标准化SOP，准备品牌合作方案</p>
+        </div>
+    </div>
+    
+    <span class="page-number">4 / 8</span>
+</section>
+
+<!-- 第5页：完整玩法 -->
+<section class="slide slide-5">
+    <div class="slide-header">
+        <h2>完整玩法架构：从预热到季度巅峰赛</h2>
+        <p>把"日赛街采"升级为可持续栏目：预热造势 → 日常出片 → 周赛沉淀 → 季度放大</p>
+    </div>
+    
+    <div class="play-grid">
+        <div class="play-card">
+            <div class="number">01</div>
+            <h3>西湖群英会</h3>
+            <p class="tag">筹备阶段 · 玻璃房直播间</p>
+            <p>直播间内"群英会"为节目预热；主办方、合作方、本土品牌公开谈判、砍价、共创选品</p>
+        </div>
+        <div class="play-card">
+            <div class="number">02</div>
+            <h3>西湖偶遇</h3>
+            <p class="tag">日赛｜每天 · 西湖知名景点：断桥等</p>
+            <p>真实路人+邀请选手+报名者；每周5期，每期5个以上短视频；30秒挑战升级为即兴小剧场</p>
+        </div>
+        <div class="play-card">
+            <div class="number">03</div>
+            <h3>玻璃房十二时辰</h3>
+            <p class="tag">周赛｜双周 · 玻璃房直播间</p>
+            <p>日赛晋级Top12；周末10-24点，每天6位选手；才艺展示、带货挑战、随机任务卡、直播间投票</p>
+        </div>
+        <div class="play-card">
+            <div class="number">04</div>
+            <h3>西湖巅峰赛</h3>
+            <p class="tag">季度 · 旁边12号场地</p>
+            <p>线上线下拉票+带货挑战；8个商家赞助商品；联动文旅、淘宝直播、电视台、电视机厂</p>
+        </div>
+    </div>
+    
+    <div style="margin-top: 40px; padding: 24px; background: var(--primary); color: white; border-radius: 12px; text-align: center;">
+        <strong>核心逻辑：</strong>不是单次街采，而是"预热—日赛—周赛—季度赛"的内容赛事体系
+    </div>
+    
+    <span class="page-number">5 / 8</span>
+</section>
+
+<!-- 第6页：赛制机制 -->
+<section class="slide slide-6">
+    <div class="slide-header">
+        <h2>赛制机制与风险控制</h2>
+        <p>把随机街采变成可运营赛事 · 核心：日赛高频出片，周赛沉淀优质选手，季度赛放大品牌与城市影响力</p>
+    </div>
+    
+    <div class="mechanism-grid">
+        <div class="mechanism-left">
+            <h3>A. 日赛〈西湖偶遇〉执行闭环</h3>
+            <div class="flow-step">
+                <span>路人登场</span>
+                <span class="arrow">→</span>
+                <span>身份标签</span>
+                <span class="arrow">→</span>
+                <span>互动反差</span>
+            </div>
+            <div class="flow-step">
+                <span>商品抽签</span>
+                <span class="arrow">→</span>
+                <span>挑战投票</span>
+                <span class="arrow">→</span>
+                <span>奖励沉淀</span>
+            </div>
+            <p style="font-size: 13px; color: var(--text-muted); margin-top: 16px;">
+                真实路人/邀请选手/报名者 → 游客、本地人、外卖小哥、情侣等 → 户外任务线+即兴小剧场 → 低认知门槛、强体验商品 → 主播点评+直播间投票 → 派样/优惠券/入群/发帖
+            </p>
+            
+            <h3 style="margin-top: 40px;">B. 晋级与评分机制</h3>
+            <p style="font-size: 14px; color: var(--text-muted); margin: 12px 0;">
+                日赛 → 周赛：带货 GMV + 投票综合分 Top12，进入〈玻璃房十二时辰〉<br>
+                投票来源：直播间投票 + 玻璃房外观众投票
+            </p>
+        </div>
+        <div class="mechanism-right">
+            <div class="score-grid">
+                <div class="score-item">
+                    <div class="percent">40%</div>
+                    <div class="label">互动</div>
+                </div>
+                <div class="score-item">
+                    <div class="percent">30%</div>
+                    <div class="label">停留</div>
+                </div>
+                <div class="score-item">
+                    <div class="percent">10%</div>
+                    <div class="label">成交</div>
+                </div>
+                <div class="score-item">
+                    <div class="percent">20%</div>
+                    <div class="label">投票</div>
+                </div>
+            </div>
+            
+            <h3 style="margin-top: 40px; color: var(--primary);">C. 风险与控制</h3>
+            <div style="background: #ffebee; padding: 16px; border-radius: 8px; margin-top: 12px;">
+                <h4 style="color: #d32f2f; font-size: 14px; margin-bottom: 8px;">围观/秩序</h4>
+                <p style="font-size: 13px; color: var(--text-muted);">人群聚集即换点；大规模活动提前审批</p>
+            </div>
+        </div>
+    </div>
+    
+    <span class="page-number">6 / 8</span>
+</section>
+
+<!-- 第7页：试跑挑战 -->
+<section class="slide slide-7">
+    <div class="slide-header">
+        <h2>试跑阶段关键挑战</h2>
+        <p>从个人摸索到标准化作战能力搭建 · 核心表达：这页
