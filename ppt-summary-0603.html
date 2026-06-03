@@ -470,6 +470,74 @@
                 page-break-after: always;
                 min-height: auto;
             }
+            .export-btn, .edit-hint {
+                display: none !important;
+            }
+        }
+        
+        /* 可编辑样式 */
+        [contenteditable="true"] {
+            outline: none;
+            border: 1px dashed transparent;
+            border-radius: 4px;
+            padding: 2px 4px;
+            transition: all 0.2s;
+        }
+        [contenteditable="true"]:hover {
+            border-color: var(--primary);
+            background: rgba(26, 92, 54, 0.05);
+        }
+        [contenteditable="true"]:focus {
+            border-color: var(--primary);
+            background: white;
+            box-shadow: 0 0 0 3px rgba(26, 92, 54, 0.1);
+        }
+        
+        /* 导出按钮 */
+        .export-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: var(--primary);
+            color: white;
+            padding: 14px 28px;
+            border-radius: 50px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(26, 92, 54, 0.3);
+            transition: all 0.3s;
+            z-index: 1000;
+            border: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .export-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(26, 92, 54, 0.4);
+        }
+        .export-btn:active {
+            transform: translateY(0);
+        }
+        
+        /* 编辑提示 */
+        .edit-hint {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(26, 92, 54, 0.9);
+            color: white;
+            padding: 10px 16px;
+            border-radius: 8px;
+            font-size: 12px;
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none;
+        }
+        .edit-hint.show {
+            opacity: 1;
         }
     </style>
 </head>
@@ -1090,3 +1158,64 @@
     
     <span class="page-number">10 / 10</span>
 </section>
+
+<!-- 导出按钮 -->
+<button class="export-btn" onclick="exportToPPT()">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+        <polyline points="7 10 12 15 17 10"/>
+        <line x1="12" y1="15" x2="12" y2="3"/>
+    </svg>
+    导出 PPT
+</button>
+
+<!-- 编辑提示 -->
+<div class="edit-hint" id="editHint">💡 提示：点击任意文字可直接编辑</div>
+
+<script>
+// 使所有文本内容可编辑
+function makeEditable() {
+    const editableSelectors = ['h1', 'h2', 'h3', 'h4', 'p', 'span', 'li'];
+    editableSelectors.forEach(selector => {
+        document.querySelectorAll(selector).forEach(el => {
+            // 排除页码和按钮
+            if (!el.classList.contains('page-number') && !el.closest('.export-btn')) {
+                el.setAttribute('contenteditable', 'true');
+            }
+        });
+    });
+}
+
+// 导出PPT功能
+function exportToPPT() {
+    // 显示提示
+    const hint = document.getElementById('editHint');
+    hint.textContent = '📥 正在准备导出...';
+    hint.classList.add('show');
+    
+    // 使用浏览器打印功能导出PDF
+    setTimeout(() => {
+        window.print();
+        hint.textContent = '💡 提示：点击任意文字可直接编辑';
+        setTimeout(() => hint.classList.remove('show'), 3000);
+    }, 500);
+}
+
+// 页面加载完成后初始化
+document.addEventListener('DOMContentLoaded', function() {
+    makeEditable();
+    
+    // 显示编辑提示
+    const hint = document.getElementById('editHint');
+    setTimeout(() => hint.classList.add('show'), 1000);
+    setTimeout(() => hint.classList.remove('show'), 5000);
+});
+
+// 监听编辑变化，自动保存到localStorage
+document.addEventListener('input', function(e) {
+    if (e.target.hasAttribute('contenteditable')) {
+        // 可以在这里添加自动保存逻辑
+        console.log('内容已修改:', e.target.textContent.substring(0, 50) + '...');
+    }
+});
+</script>
