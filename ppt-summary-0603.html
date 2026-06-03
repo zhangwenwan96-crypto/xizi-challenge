@@ -559,48 +559,68 @@
 </section>
 
 <!-- 第2页：大纲 -->
-<section class="slide" style="background: linear-gradient(180deg, #fafafa 0%, white 100%);">
-    <div class="slide-header" style="text-align: center; margin-bottom: 60px;">
-        <h2 style="font-size: 36px; color: var(--primary);">汇报大纲</h2>
-        <div style="width: 60px; height: 3px; background: var(--primary); margin: 15px auto 0;"></div>
+<section class="slide" style="background: linear-gradient(135deg, #e8e8e8 0%, #d5d5d5 100%); position: relative; overflow: hidden;">
+    <!-- 装饰花纹 -->
+    <div style="position: absolute; top: 40px; left: 40px; width: 150px; height: 150px; opacity: 0.1;">
+        <svg viewBox="0 0 100 100" fill="none" stroke="#1a1a1a" stroke-width="0.5">
+            <circle cx="50" cy="50" r="45"/>
+            <circle cx="50" cy="50" r="30"/>
+            <path d="M50 5 L50 95 M5 50 L95 50"/>
+        </svg>
+    </div>
+    <div style="position: absolute; bottom: 40px; right: 40px; width: 180px; height: 180px; opacity: 0.08;">
+        <svg viewBox="0 0 100 100" fill="none" stroke="#1a1a1a" stroke-width="0.5">
+            <path d="M50 10 Q80 30 80 50 Q80 70 50 90 Q20 70 20 50 Q20 30 50 10"/>
+            <circle cx="50" cy="50" r="20"/>
+        </svg>
     </div>
     
-    <div style="margin: 0 80px; display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px 60px;">
-        <div style="display: flex; align-items: flex-start; gap: 16px; font-size: 15px; color: var(--text-dark);">
-            <span style="font-weight: bold; color: var(--primary); font-size: 18px;">01</span>
-            <span>战略大图：从街头采访到城市真人秀带货 IP</span>
-        </div>
-        <div style="display: flex; align-items: flex-start; gap: 16px; font-size: 15px; color: var(--text-dark);">
-            <span style="font-weight: bold; color: var(--primary); font-size: 18px;">02</span>
-            <span>9天36个街头采访复盘：核心发现与业务价值</span>
-        </div>
-        <div style="display: flex; align-items: flex-start; gap: 16px; font-size: 15px; color: var(--text-dark);">
-            <span style="font-weight: bold; color: var(--primary); font-size: 18px;">03</span>
-            <span>三平台数据复盘：抖音/小红书/淘宝直播</span>
-        </div>
-        <div style="display: flex; align-items: flex-start; gap: 16px; font-size: 15px; color: var(--text-dark);">
-            <span style="font-weight: bold; color: var(--primary); font-size: 18px;">04</span>
-            <span>MVP验证：四阶段落地节奏</span>
-        </div>
-        <div style="display: flex; align-items: flex-start; gap: 16px; font-size: 15px; color: var(--text-dark);">
-            <span style="font-weight: bold; color: var(--primary); font-size: 18px;">05</span>
-            <span>完整玩法架构：从预热到季度巅峰赛</span>
-        </div>
-        <div style="display: flex; align-items: flex-start; gap: 16px; font-size: 15px; color: var(--text-dark);">
-            <span style="font-weight: bold; color: var(--primary); font-size: 18px;">06</span>
-            <span>赛制机制与风险控制</span>
-        </div>
-        <div style="display: flex; align-items: flex-start; gap: 16px; font-size: 15px; color: var(--text-dark);">
-            <span style="font-weight: bold; color: var(--primary); font-size: 18px;">07</span>
-            <span>试跑阶段关键挑战与组织化升级</span>
-        </div>
-        <div style="display: flex; align-items: flex-start; gap: 16px; font-size: 15px; color: var(--text-dark);">
-            <span style="font-weight: bold; color: var(--primary); font-size: 18px;">08</span>
-            <span>项目失败的核心风险与闭环建立</span>
+    <!-- 标题 -->
+    <div style="text-align: center; margin-bottom: 80px; margin-top: 40px;">
+        <h2 style="font-size: 72px; color: #1a1a1a; font-weight: 900; letter-spacing: 12px; text-shadow: 3px 3px 0 rgba(255,255,255,0.8);">CONTENTS</h2>
+    </div>
+    
+    <!-- 时间线 -->
+    <div style="position: relative; margin: 0 100px;">
+        <!-- 虚线 -->
+        <div style="position: absolute; top: 55px; left: 0; right: 0; height: 1px; background: repeating-linear-gradient(90deg, #1a1a1a 0, #1a1a1a 4px, transparent 4px, transparent 8px); opacity: 0.4;"></div>
+        
+        <div style="display: flex; justify-content: space-between; gap: 40px;">
+            <!-- 01 宏观战略 -->
+            <div style="flex: 1; text-align: center;">
+                <div style="font-size: 56px; font-weight: 900; color: #1a1a1a; margin-bottom: 20px;">01</div>
+                <div style="width: 14px; height: 14px; background: #1a1a1a; border-radius: 50%; margin: 0 auto 25px;"></div>
+                <div style="font-size: 22px; font-weight: bold; color: #1a1a1a; margin-bottom: 10px;">宏观战略</div>
+                <div style="font-size: 13px; color: #666; letter-spacing: 1px;">Strategic Overview</div>
+            </div>
+            
+            <!-- 02 执行总结 -->
+            <div style="flex: 1; text-align: center;">
+                <div style="font-size: 56px; font-weight: 900; color: #1a1a1a; margin-bottom: 20px;">02</div>
+                <div style="width: 14px; height: 14px; background: #1a1a1a; border-radius: 50%; margin: 0 auto 25px;"></div>
+                <div style="font-size: 22px; font-weight: bold; color: #1a1a1a; margin-bottom: 10px;">执行总结</div>
+                <div style="font-size: 13px; color: #666; letter-spacing: 1px;">Execution Review</div>
+            </div>
+            
+            <!-- 03 近期计划 -->
+            <div style="flex: 1; text-align: center;">
+                <div style="font-size: 56px; font-weight: 900; color: #1a1a1a; margin-bottom: 20px;">03</div>
+                <div style="width: 14px; height: 14px; background: #1a1a1a; border-radius: 50%; margin: 0 auto 25px;"></div>
+                <div style="font-size: 22px; font-weight: bold; color: #1a1a1a; margin-bottom: 10px;">近期计划</div>
+                <div style="font-size: 13px; color: #666; letter-spacing: 1px;">Action Plan</div>
+            </div>
+            
+            <!-- 04 相关数据 -->
+            <div style="flex: 1; text-align: center;">
+                <div style="font-size: 56px; font-weight: 900; color: #1a1a1a; margin-bottom: 20px;">04</div>
+                <div style="width: 14px; height: 14px; background: #1a1a1a; border-radius: 50%; margin: 0 auto 25px;"></div>
+                <div style="font-size: 22px; font-weight: bold; color: #1a1a1a; margin-bottom: 10px;">相关数据</div>
+                <div style="font-size: 13px; color: #666; letter-spacing: 1px;">Data Analysis</div>
+            </div>
         </div>
     </div>
     
-    <span class="page-number">2 / 10</span>
+    <span class="page-number" style="color: rgba(0,0,0,0.3);">2 / 10</span>
 </section>
 
 <!-- 第3页：战略大图 -->
