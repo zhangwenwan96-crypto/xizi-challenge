@@ -367,6 +367,73 @@ nav .links{display:none}
 </div>
 </section>
 
+<section class="signup" id="signup" style="padding:80px 0;background:linear-gradient(135deg,#fff9c4,#e8f5e9)">
+<div class="container" style="max-width:600px;margin:0 auto;padding:0 20px">
+<h2 style="text-align:center;font-size:32px;color:#0a5c36;margin-bottom:8px">🎯 我要报名</h2>
+<p style="text-align:center;color:#666;margin-bottom:40px">加入西湖边最有趣的真人秀挑战，展现你的风采</p>
+
+<form id="signup-form" action="https://formsubmit.co/zhanglingling@zhiping.tech" method="POST">
+<input type="hidden" name="_subject" value="西子湖畔挑战赛-新报名">
+<input type="hidden" name="_captcha" value="false">
+<input type="hidden" name="_template" value="table">
+<input type="hidden" name="_next" value="https://zhangwenwan96-crypto.github.io/xizi-challenge/thanks.html">
+
+<div style="margin-bottom:16px">
+<label style="display:block;font-weight:600;color:#333;margin-bottom:6px">姓名 *</label>
+<input name="姓名" type="text" required placeholder="你的名字" style="width:100%;padding:12px;border:1px solid #ddd;border-radius:8px;font-size:15px">
+</div>
+
+<div style="margin-bottom:16px">
+<label style="display:block;font-weight:600;color:#333;margin-bottom:6px">联系方式 *</label>
+<input name="联系方式" type="text" required placeholder="手机号或微信号" style="width:100%;padding:12px;border:1px solid #ddd;border-radius:8px;font-size:15px">
+</div>
+
+<div style="margin-bottom:16px">
+<label style="display:block;font-weight:600;color:#333;margin-bottom:6px">年龄段</label>
+<select name="年龄段" style="width:100%;padding:12px;border:1px solid #ddd;border-radius:8px;font-size:15px;background:#fff">
+<option value="">请选择</option><option>18岁以下</option><option>18-25岁</option><option>26-35岁</option><option>36-45岁</option><option>46岁以上</option>
+</select>
+</div>
+
+<div style="margin-bottom:16px">
+<label style="display:block;font-weight:600;color:#333;margin-bottom:6px">来自哪里</label>
+<input name="来自哪里" type="text" placeholder="如：杭州 / 上海 / 北京" style="width:100%;padding:12px;border:1px solid #ddd;border-radius:8px;font-size:15px">
+</div>
+
+<div style="margin-bottom:16px">
+<label style="display:block;font-weight:600;color:#333;margin-bottom:6px">是否愿意出镜</label>
+<div style="display:flex;gap:20px;padding:8px 0">
+<label style="display:flex;align-items:center;gap:6px;cursor:pointer"><input type="radio" name="是否愿意出镜" value="愿意"> 愿意</label>
+<label style="display:flex;align-items:center;gap:6px;cursor:pointer"><input type="radio" name="是否愿意出镜" value="不愿意"> 不愿意</label>
+<label style="display:flex;align-items:center;gap:6px;cursor:pointer"><input type="radio" name="是否愿意出镜" value="看情况"> 看情况</label>
+</div>
+</div>
+
+<div style="margin-bottom:16px">
+<label style="display:block;font-weight:600;color:#333;margin-bottom:6px">擅长风格</label>
+<input name="擅长风格" type="text" placeholder="如：搞笑 / 才艺 / 带货 / 脱口秀" style="width:100%;padding:12px;border:1px solid #ddd;border-radius:8px;font-size:15px">
+</div>
+
+<div style="margin-bottom:16px">
+<label style="display:block;font-weight:600;color:#333;margin-bottom:6px">可参与时间</label>
+<input name="可参与时间" type="text" placeholder="如：周末 / 工作日晚上 / 随时" style="width:100%;padding:12px;border:1px solid #ddd;border-radius:8px;font-size:15px">
+</div>
+
+<div style="margin-bottom:16px">
+<label style="display:block;font-weight:600;color:#333;margin-bottom:6px">社交账号（选填）</label>
+<input name="社交账号" type="text" placeholder="抖音 / 小红书 / 微博 ID" style="width:100%;padding:12px;border:1px solid #ddd;border-radius:8px;font-size:15px">
+</div>
+
+<div style="margin-bottom:24px">
+<label style="display:block;font-weight:600;color:#333;margin-bottom:6px">备注</label>
+<textarea name="备注" rows="3" placeholder="想说点什么..." style="width:100%;padding:12px;border:1px solid #ddd;border-radius:8px;font-size:15px;resize:vertical"></textarea>
+</div>
+
+<button type="submit" style="width:100%;padding:16px;background:linear-gradient(135deg,#ff6f00,#ff8f00);color:#fff;border:none;border-radius:30px;font-size:18px;font-weight:700;cursor:pointer;box-shadow:0 4px 20px rgba(255,111,0,.35);transition:all .3s" onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 6px 28px rgba(255,111,0,.45)'" onmouseout="this.style.transform='none';this.style.boxShadow='0 4px 20px rgba(255,111,0,.35)'">🚀 提交报名</button>
+</form>
+</div>
+</section>
+
 <section class="rules" id="rules">
 <div class="container">
 <h2>活动规则与合规</h2>
@@ -396,6 +463,42 @@ nav .links{display:none}
 </footer>
 
 <script>
+// --- Service Worker 注册（用于钉钉通知代理） ---
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/xizi-challenge/sw.js')
+    .then(reg => console.log('SW 注册成功:', reg.scope))
+    .catch(err => console.log('SW 注册失败:', err));
+}
+
+// --- 表单提交监听（并行发送钉钉通知） ---
+document.addEventListener('DOMContentLoaded', () => {
+  const form = document.getElementById('signup-form');
+  if (form) {
+    form.addEventListener('submit', function(e) {
+      // 收集表单数据
+      const fd = new FormData(this);
+      const data = {};
+      fd.forEach((v, k) => { data[k] = v; });
+
+      // 通过 SW 发送钉钉通知（fire-and-forget，不阻塞表单提交）
+      if (navigator.serviceWorker && navigator.serviceWorker.controller) {
+        navigator.serviceWorker.controller.postMessage({
+          type: 'dingtalk-notify',
+          data: data
+        });
+      } else {
+        // SW 还没激活，等它 ready
+        navigator.serviceWorker.ready.then(reg => {
+          reg.active.postMessage({
+            type: 'dingtalk-notify',
+            data: data
+          });
+        });
+      }
+    });
+  }
+});
+
 // --- 往期精彩视频 ---
 const DOC_URL = "https://alidocs.dingtalk.com/i/nodes/r1R7q3QmWe7LmYPlhZOaxQNoJxkXOEP2?iframeQuery=utm_medium%3Dportal_team_home2_trends%26utm_source%3Dportal";
 const videos = [
