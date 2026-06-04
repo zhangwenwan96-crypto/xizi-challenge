@@ -1,7 +1,7 @@
 // Service Worker for 西子湖畔挑战赛
 // 代理钉钉机器人通知，绕过浏览器 CORS 限制
 
-const DINGTALK_WEBHOOK = 'https://oapi.dingtalk.com/robot/send?access_token=9e31c2ef9706ba2015a6743180bbf490469eeaa9eacb1397b09b13bdcc172fe4';
+const DINGTALK_WEBHOOK = 'https://oapi.dingtalk.com/robot/send?access_token=a91bc620f3644116d097501061b7e73c50d34435d9a3e389adfafb9abd98abc3';
 
 self.addEventListener('message', (event) => {
   if (event.data && event.data.type === 'dingtalk-notify') {
