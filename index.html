@@ -258,19 +258,25 @@ nav .links{display:none}
 <div class="container">
 <h2>我要报名</h2>
 <p class="sec-desc">不需要你是专业主播，只要你敢表达、有故事、有反差，就有机会成为西湖边最特别的挑战者</p>
+<form action="https://formsubmit.co/zhanglingling@zhiping.tech" method="POST" id="signup-form">
+<input type="hidden" name="_subject" value="西子湖畔挑战赛 - 新报名">
+<input type="hidden" name="_captcha" value="false">
+<input type="hidden" name="_template" value="table">
+<input type="hidden" name="_next" value="https://zhangwenwan96-crypto.github.io/xizi-challenge/thanks.html">
 <div class="fields">
-<div class="field"><label>姓名/昵称 *</label><input placeholder="怎么称呼你？"></div>
-<div class="field"><label>手机号/微信 *</label><input placeholder="方便我们联系你"></div>
-<div class="field"><label>年龄段</label><select><option>请选择</option><option>18岁以下</option><option>18-25岁</option><option>26-35岁</option><option>36-45岁</option><option>45岁以上</option></select></div>
-<div class="field"><label>来自哪里</label><input placeholder="本地居民/外地游客/学生..."></div>
-<div class="field"><label>是否愿意出镜 *</label><select><option>请选择</option><option>愿意出镜</option><option>可戴面具</option><option>暂不出镜</option></select></div>
-<div class="field"><label>擅长风格</label><input placeholder="搞笑/方言/古风/颜值/亲子/情侣/才艺"></div>
-<div class="field"><label>可参与时间</label><input placeholder="周末/工作日晚上/随时"></div>
-<div class="field"><label>是否同意肖像授权 *</label><select><option>请选择</option><option>同意肖像授权</option></select></div>
-<div class="field"><label>小红书/抖音账号</label><input placeholder="有的话可以填，加分"></div>
-<div class="field full"><label>备注/个人故事</label><textarea placeholder="关于你的特别故事..."></textarea></div>
+<div class="field"><label>姓名/昵称 *</label><input name="姓名" placeholder="怎么称呼你？" required></div>
+<div class="field"><label>手机号/微信 *</label><input name="联系方式" placeholder="方便我们联系你" required></div>
+<div class="field"><label>年龄段</label><select name="年龄段"><option value="">请选择</option><option>18岁以下</option><option>18-25岁</option><option>26-35岁</option><option>36-45岁</option><option>45岁以上</option></select></div>
+<div class="field"><label>来自哪里</label><input name="来自哪里" placeholder="本地居民/外地游客/学生..."></div>
+<div class="field"><label>是否愿意出镜 *</label><select name="是否愿意出镜" required><option value="">请选择</option><option>愿意出镜</option><option>可戴面具</option><option>暂不出镜</option></select></div>
+<div class="field"><label>擅长风格</label><input name="擅长风格" placeholder="搞笑/方言/古风/颜值/亲子/情侣/才艺"></div>
+<div class="field"><label>可参与时间</label><input name="可参与时间" placeholder="周末/工作日晚上/随时"></div>
+<div class="field"><label>是否同意肖像授权 *</label><select name="肖像授权" required><option value="">请选择</option><option>同意肖像授权</option></select></div>
+<div class="field"><label>小红书/抖音账号</label><input name="社交账号" placeholder="有的话可以填，加分"></div>
+<div class="field full"><label>备注/个人故事</label><textarea name="备注" placeholder="关于你的特别故事..."></textarea></div>
 </div>
-<div class="submit-wrap"><button class="btn-submit" onclick="alert('🎉 报名信息已收到！我们会尽快联系你～')">提交报名</button></div>
+<div class="submit-wrap"><button type="submit" class="btn-submit">提交报名</button></div>
+</form>
 </div>
 </section>
 
